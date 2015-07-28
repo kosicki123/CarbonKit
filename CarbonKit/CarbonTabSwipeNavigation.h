@@ -92,6 +92,12 @@
 - (void)setNormalColor:(UIColor *)color;
 
 /**
+ *	UIColor for indicator
+ *	@param color UIColor : color of indicator
+ */
+- (void)setIndicatorColor:(UIColor *)color;
+
+/**
  *	UIFont and UIColor for tab in normal state
  *	@param color UIColor : color of normal state
  *	@param font UIFont : font of normal state
@@ -115,11 +121,5 @@
  * Add 1 pixel shadow
  */
 - (void)addShadow;
-
-/**
- *  Set extra space on the left and the right of tab title
- *  @param extra CGFloat : left and right extra space
- */
-- (void)setExtraSpace:(CGFloat)extra;
 
 @end
