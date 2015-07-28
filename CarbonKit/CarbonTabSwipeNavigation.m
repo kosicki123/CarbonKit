@@ -30,8 +30,6 @@
 	NSUInteger numberOfTabs;
 	NSInteger selectedIndex;
 	
-	CGFloat extraSpace;
-	
 	CGPoint previewsOffset;
 	
 	NSMutableArray *tabs;
@@ -61,7 +59,6 @@
 	self.delegate = delegate;
 	numberOfTabs = names.count;
 	rootViewController = viewController;
-	extraSpace = 15;
 	
 	// create page controller
 	pageController = [UIPageViewController alloc];
@@ -115,7 +112,7 @@
 	for (UIView *tabView in [segmentController subviews]) {
 		for (UIView *label in tabView.subviews) {
 			if ([label isKindOfClass:[UILabel class]]) {
-				CGFloat tabWidth = roundf([label sizeThatFits:CGSizeMake(FLT_MAX, 0)].width + extraSpace * 2);
+				CGFloat tabWidth = roundf([label sizeThatFits:CGSizeMake(FLT_MAX, 16)].width + 30); // 30 extra space
 				[segmentController setWidth:tabWidth forSegmentAtIndex:i];
 				
 				segmentedWidth += tabWidth;
@@ -283,12 +280,15 @@
 }
 
 - (void)setSelectedColor:(UIColor *)color font:(UIFont *)font {
-	indicator.backgroundColor = color;
 	[segmentController setTitleTextAttributes:@{
 												NSForegroundColorAttributeName:color,
 												NSFontAttributeName:font
 												}
 									 forState:UIControlStateSelected];
+}
+
+- (void)setIndicatorColor:(UIColor *)color {
+    indicator.backgroundColor = color;
 }
 
 // add shadow
@@ -301,11 +301,6 @@
 	[shadow.layer setShadowRadius:.3f];
 	[shadow.layer setShadowOffset:CGSizeMake(0, .2)];
 	[self.view addSubview:shadow];
-}
-
-// set extraSpace
-- (void)setExtraSpace:(CGFloat)extra {
-	extraSpace = extra;
 }
 
 - (void)segmentAction:(UISegmentedControl *)segment {
@@ -439,7 +434,7 @@
 		
 		for (UIView *label in tabView.subviews) {
 			if ([label isKindOfClass:[UILabel class]]) {
-				CGFloat tabWidth = roundf([label sizeThatFits:CGSizeMake(FLT_MAX, 0)].width + extraSpace * 2);
+				CGFloat tabWidth = roundf([label sizeThatFits:CGSizeMake(FLT_MAX, 0)].width + 30); // 30 extra space
 				[segmentController setWidth:tabWidth forSegmentAtIndex:i];
 				
 				segmentedWidth += tabWidth;
